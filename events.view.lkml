@@ -17,6 +17,9 @@ view: events {
     sql: ${TABLE}.city ;;
   }
 
+ dimension: poo {
+   sql: 1=1 ;;
+ }
   dimension: country {
     type: string
     map_layer_name: countries
