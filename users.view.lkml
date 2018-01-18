@@ -12,12 +12,6 @@ view: users {
     sql: ${TABLE}.age ;;
   }
 
-  dimension: full_name {
-    type: string
-    sql: ${first_name}|| ' ' || ${last_name} ;;
-  }
-
-
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;
@@ -86,6 +80,28 @@ view: users {
   dimension: zip {
     type: zipcode
     sql: ${TABLE}.zip ;;
+  }
+
+  dimension: full_name {
+    type: string
+    sql: ${first_name}|| ' ' || ${last_name} ;;
+  }
+
+  dimension: is_over_age_18 {
+    type: yesno
+    sql: ${age}>18 ;;
+  }
+
+  dimension: is_user_from_USA{
+    type: yesno
+    sql: ${country}='USA' ;;
+  }
+
+  dimension: age_tier {
+    type: tier
+    tiers: [0,10,25,50]
+    style: integer
+    sql: ${age}  ;;
   }
 
   measure: count {
