@@ -7,4 +7,4 @@ include: "*.view"
 include: "*.dashboard"
 
 explore: users {}
-explore: distribution_centers {}
+explore: order_items {}
