@@ -12,6 +12,23 @@ view: users {
     sql: ${TABLE}.age ;;
   }
 
+  dimension: age_tier {
+    type: tier
+    tiers: [0,10,30,80]
+    style: integer
+    sql: ${age} ;;
+  }
+
+  dimension: is_over_age_18 {
+    type: yesno
+    sql: ${age}>18 ;;
+  }
+
+  dimension: is_from_usa {
+    type: yesno
+    sql: ${country}= 'USA' ;;
+  }
+
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;
@@ -57,6 +74,11 @@ view: users {
     sql: ${TABLE}.last_name ;;
   }
 
+  dimension: full_name {
+    type: string
+    sql: ${first_name} || ' ' || ${last_name} ;;
+  }
+
   dimension: latitude {
     type: number
     sql: ${TABLE}.latitude ;;
@@ -84,6 +106,15 @@ view: users {
 
   measure: count {
     type: count
-    drill_fields: [id, first_name, last_name, events.count, order_items.count]
+    drill_fields: [id, full_name, state, zip]
+  }
+
+  measure: count_female {
+    type: count
+    filters: {
+      field: gender
+      value: "Female"
+    }
+    drill_fields: [id, full_name, city, state, zip]
   }
 }

@@ -21,6 +21,11 @@ view: order_items {
     sql: ${TABLE}.created_at ;;
   }
 
+  dimension: days_as_user {
+    type: number
+    sql: datediff('day',${users.created_date},${order_items.created_date}) ;;
+  }
+
   dimension_group: delivered {
     type: time
     timeframes: [
@@ -94,6 +99,19 @@ view: order_items {
     type: count
     drill_fields: [detail*]
   }
+
+  measure: total_sale_price {
+    type: sum
+    sql: ${sale_price} ;;
+    value_format_name: usd
+  }
+
+  measure: running_total_sale_price {
+    type: running_total
+    sql: ${total_sale_price} ;;
+    value_format_name: usd
+  }
+
 
   # ----- Sets of fields for drilling ------
   set: detail {
