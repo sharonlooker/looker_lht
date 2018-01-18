@@ -12,6 +12,12 @@ view: users {
     sql: ${TABLE}.age ;;
   }
 
+  dimension: full_name {
+    type: string
+    sql: ${first_name}|| ' ' || ${last_name} ;;
+  }
+
+
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;
