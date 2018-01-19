@@ -11,6 +11,9 @@ view: user_order_facts {
       left join order_items on users.id = order_items.user_id
       group by 1
        ;;
+    datagroup_trigger: new_users_add
+    distribution_style: even
+    sortkeys: ["user_id"]
   }
 
   measure: count {
@@ -44,11 +47,11 @@ view: user_order_facts {
 
   dimension_group: last_order {
     type: time
-    timeframes: [date, week, month, year]
+    timeframes: [date, week, month, year, quarter]
     sql: ${TABLE}.last_order ;;
   }
 
   set: detail {
-    fields: [user_id, lifetime_order_items, lifetime_value, first_order_date, last_order_date]
+    fields: [user_id, lifetime_order_items, lifetime_value, first_order_date, last_order_quarter]
   }
 }
