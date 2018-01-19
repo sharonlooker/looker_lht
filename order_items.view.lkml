@@ -21,18 +21,11 @@ view: order_items {
     sql: ${TABLE}.created_at ;;
   }
 
-<<<<<<< HEAD
 dimension: days_as_user {
   type: number
   sql: datediff('day',${users.created_date},${order_items.created_date}) ;;
 }
-=======
-  dimension: days_as_user {
-    type: number
-    sql: datediff('day',${users.created_date},${order_items.created_date}) ;;
-  }
 
->>>>>>> branch 'master' of git@github.com:sharonlooker/looker_lht.git
   dimension_group: delivered {
     type: time
     timeframes: [
@@ -116,7 +109,6 @@ dimension: days_as_user {
 
   measure: total_sale_price {
     type: sum
-<<<<<<< HEAD
     value_format_name: usd
     sql: ${sale_price} ;;
   }
@@ -125,18 +117,6 @@ dimension: days_as_user {
     type: running_total
     sql: ${total_sale_price} ;;
   }
-=======
-    sql: ${sale_price} ;;
-    value_format_name: usd
-  }
-
-  measure: running_total_sale_price {
-    type: running_total
-    sql: ${total_sale_price} ;;
-    value_format_name: usd
-  }
-
->>>>>>> branch 'master' of git@github.com:sharonlooker/looker_lht.git
 
   # ----- Sets of fields for drilling ------
   set: detail {
