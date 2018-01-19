@@ -7,6 +7,14 @@ include: "*.view"
 include: "*.dashboard"
 
 explore: users {
+#   sql_always_where: ${order_items.status} != 'Cancelled' ;;
+#   sql_always_having: ${order_items.count} != 0 ;;
+always_filter: {
+  filters: {
+    field: order_items.status
+    value: "Cancelled"
+  }
+}
   join: order_items {
     type: left_outer
     relationship: one_to_many
@@ -25,6 +33,11 @@ explore: users {
     sql_on: ${inventory_items.product_id} = ${products.id} ;;
   }
 
+  join: user_order_facts {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${user_order_facts.user_id} = ${users.id} ;;
+  }
 }
 
 
