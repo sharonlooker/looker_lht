@@ -104,6 +104,15 @@ view: users {
     sql: ${age}  ;;
   }
 
+measure: count_female {
+  type: count
+  filters: {
+    field: gender
+    value: "Female"
+  }
+  drill_fields: [age]
+}
+
   measure: count {
     type: count
     drill_fields: [id, first_name, last_name, events.count, order_items.count]
